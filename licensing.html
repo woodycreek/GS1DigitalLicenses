@@ -323,9 +323,16 @@
         <section id="credential-subject-id">
             <h3>VCDM Credential Subject ID property</h3>
             <p>The id property is optional in the VCDM, but MUST be present in GS1 License Credentials. The credential subject ID in all
-            license credentials MUST be a DID that is controlled by the licensee. DIDs are defined by the W3C specification
-            <a target="_blank" rel="noopener noreferrer" href="https://www.w3.org/TR/did-1.0/">https://www.w3.org/TR/did-1.0/</a>.</p>
-            <p><span class="todo">confirm with Steering Committee</span>What advice or guidance do we need here?</p>
+            license credentials MUST be the DID (see <a target="_blank" rel="noopener noreferrer" href="https://www.w3.org/TR/did-1.0/">https://www.w3.org/TR/did-1.0/</a>)
+            of the licensee. 
+            </p>
+            <p>Notice that this DID might be directly controlled by the licensee or indirectly controlled through a service provider ("custodial"). This 
+            SHOULD be stated in the corresponding DID document, see
+            <a target="_blank" rel="noopener noreferrer" href="https://www.w3.org/TR/did-1.0/#the-relationship-between-did-controllers-and-did-subjects">https://www.w3.org/TR/did-1.0/#the-relationship-between-did-controllers-and-did-subjects</a>,
+            but is not part of the license credential.
+            </p>
+            <p>Notice further that only the controller of this DID can issue the next credential in the <a href="#License-Hierarchy">hierarchy</a>.
+            </p>
         </section>
     </section>
     <section id="License-Examples">
