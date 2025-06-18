@@ -161,7 +161,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "title": "Member Company Decentralized Identifier. The subject of this credential must be the issuer of all GS1 Key and Data Credential inherit from the company prefix.", 
+            "title": "Member Company Decentralized Identifier. The subject of this credential must be the issuer of all GS1 ID Key and GS1 Data Credential inherit from the company prefix.", 
             "type": "string",
             "format": "uri"
           },

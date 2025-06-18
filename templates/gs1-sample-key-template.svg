@@ -28,7 +28,7 @@
     [CREDENTIAL NAME]
   </text>
 
-  <!-- GS1 Key Digital Link -->
+  <!-- GS1 ID Key Digital Link -->
   <text id="gs1-key-digital-link"
         x="295" y="85"
         text-anchor="middle"

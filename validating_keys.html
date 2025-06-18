@@ -16,7 +16,7 @@
     <section id="key-validation-rules">
         <h3>GS1 ID Key Validation Rules</h3>
 
-        Denoting the GS1 ID Key Credential as <strong>K</strong> and the credential referenced by <strong>K</strong>'s <code>extendsCredential</code> property as <strong>P</strong>,
+        Denoting the GS1 ID Key Credential as <strong>K</strong>, <strong>K</strong>'s <code>credentialSubject</code> <code>id</code> as <strong>D</strong>, and the credential referenced by <strong>K</strong>'s <code>extendsCredential</code> property as <strong>P</strong>,
         the following steps MUST be performed to validate a GS1 ID Key Credential:
 
         <ul>
@@ -25,23 +25,18 @@
             <li><strong>K</strong> MUST NOT be revoked (see <a href="#revocation"></a>).</li>
             <li><strong>K</strong> <code>validFrom</code> MUST NOT be in the future.</li>
             <li>The credential document <strong>K</strong>  MUST conform to the JSON schema located at <a href="https://id.gs1.org/vc/schema/v1/key">https://id.gs1.org/vc/schema/v1/key</a>.</li>
-            <li>The <code>issuer</code> of <strong>K</strong>  MUST match the issuer of <strong>P</strong>.</li>
-            <li><strong>P</strong> MUST be a valid <a href="#license-validation">GS1 License Credential</a> or MUST be a valid <a href="#validating-keys">GS1 ID Key Credential</a>.</li>
-            <li>If <strong>P</strong> is a valid GS1 License Credential:
+            <li>If <strong>D</strong> contains a GS1 Digital Link with primary Key <strong>PK</strong> and no key qualfiers:</li>
                 <ul>
-                    <li>The primary GS1 ID Key extracted from <strong>K</strong> <code>credentialSubject</code> <code>id</code>
-                            MUST begin with (as a string) the <code>licenseValue</code> from <strong>P</strong>. <span class="todo">TODO</span>
-                        this isnt quite correct. For example a digital link always references the GTIN as 14 digits but the licenseValue could be from
-                        a GTIN 8 license credential in which case there are leading zeros.</li>
+                    <li><strong>P</strong> MUST be a valid <a href="#license-validation">GS1 License Credential</a>.</li>
+                    <li>The <code>issuer</code> of <strong>K</strong>  MUST match the subject of <strong>P</strong>.</li>
+                    <li><strong>PK</strong> MUST begin with (as a string) the <code>licenseValue</code> from <strong>P</strong>.</li>
                 </ul>
-            </li>
-            <li>If <strong>P</strong> is a valid GS1 ID Key Credential:
+            <li>If <strong>D</strong> contains a GS1 Digital Link with primary Key <strong>PK</strong> and one or more key qualifiers:</li>
                 <ul>
-                    <li>The canonicalized <strong>K</strong> <code>credentialSubject</code> <code>id</code> MUST start with
-                        and MUST extend the canonicalized <strong>P</strong> <code>credentialSubject</code> <code>id</code>. <span class="todo">TODO</span>
-                        the word extend here is vague. I think it should have to contain addition path elements in the URI?</li>
+                    <li>The <code>issuer</code> of <strong>K</strong>  MUST match the issuer of <strong>P</strong>.</li>
+                    <li><strong>P</strong> MUST be a valid <a href="#validating-keys">GS1 ID Key Credential</a>.</li>
+                    <li>The primary key of <strong>P</strong>'s <code>credentialSubject</code> <code>id</code> MUST equal <strong>PK</strong>.</li>
                 </ul>
-            </li>
         </ul>
 
 

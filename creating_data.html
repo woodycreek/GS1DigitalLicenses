@@ -58,22 +58,24 @@
                 </tr>
                 <tr>
                     <td><code>credentialStatus</code></td>
-                    <td>This property is optional in the VCDM but MUST be present and MUST be of the type <code>BitstringStatusListEntry</code>
-                    defined in the <a target="_blank" rel="noopener noreferrer" href="https://www.w3.org/TR/vc-bitstring-status-list/">vc-bitstring-status-list</a> from the W3C. <span class="todo">confirm with Steering Committee</span>Do we force our members to do this?</td>
+                    <td>This property is optional in the VCDM but MAY be present. If present, this property MUST be of the type <code>BitstringStatusListEntry</code>
+                    defined in the <a target="_blank" rel="noopener noreferrer" href="https://www.w3.org/TR/vc-bitstring-status-list/">vc-bitstring-status-list</a> from the W3C.</td>
                 </tr>
                 <tr>
                     <td><code>credentialSchema</code></td>
                     <td>This property is optional in the VCDM but MUST be present in all GS1 Data Credentials and MUST be of the type <code>JsonSchema</code>
-                        defined in the <a target="_blank" rel="noopener noreferrer" href="https://www.w3.org/TR/vc-json-schema/">vc-json-schema</a> from the W3C. <span class="todo">confirm with Steering Committee</span> is this optional.</td>
+                        defined in the <a target="_blank" rel="noopener noreferrer" href="https://www.w3.org/TR/vc-json-schema/">vc-json-schema</a> from the W3C. </td>
+                </tr>
+                <tr>
+                    <td><code>validFrom</code></td>
+                    <td>This property is optional in the VCDM but MUST be present in all GS1 Data Credentials.</td>
                 </tr>
                 <tr>
                     <td><code>renderMethod</code></td>
-                    <td>This property is optional in the VCDM but SHOULD be present and SHOULD be of the type <code>SvgRenderingTemplate</code>. <span class="todo">confirm with Steering Committee</span> is this optional.</td>
+                    <td>This property is optional in the VCDM but SHOULD be present and SHOULD be of the type <code>SvgRenderingTemplate</code>.</td>
                 </tr>
             </tbody>
         </table>
-
-        <p><span class="todo">confirm with Steering Committee</span> should we require a <code>validFrom</code>.</p>
 
         <p>All GS1 Data Credentials share these additional properties:</p>
 

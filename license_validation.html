@@ -20,8 +20,9 @@
         we can see the <code>licenseValue</code> of the GTIN starts with the <code>licenseValue</code> of the GCP which starts with
         the <code>licenseValue</code> from the prefix license, indicating a complete and valid chain.</p>
 
-        <p><span class="todo">confirm with Steering Committee</span> What do we say here about the utility of validating a license?  Should we
-        talk about whether this can be used with a presentation to validate a trading partners identity?</p>
+        <p>Validating a license chain ensures that assertions from the licensee are authentic and attributable to the party identified by the <code>organization</code> within the GS1 License Credential subject field.  For specifics of GS1
+        identity validation policies consult the  <p><span class="todo">Governance Document</span> or your local MO.
+
     </section>
     <section id="license-validation-rules">
         <h3>License Validation Rules</h3>
@@ -43,7 +44,7 @@
                 <li><strong>PL</strong> MUST conform to the JSON schema located at <a target="_blank" rel="noopener noreferrer" href="https://id.gs1.org/vc/schema/v1/prefix">https://id.gs1.org/vc/schema/v1/prefix.</a></li>
                 <li><strong>PL</strong>  <code>Issuer</code> property MUST be a GS1 GO did:web or did:webvh.</li>
                 <li><strong>PL</strong> <code>licenseValue</code>  MUST be from two to seven numeric digits.<span class="todo">TODO add this rule to the schema</span></li>
-                <li><strong>PL</strong> <code>alternateLicenseValue</code> (if present) MUST <span class="todo">TODO this is complicated</span></li>
+                <li>If <strong>PL</strong> <code>alternateLicenseValue</code> is present,  <code>licenseValue</code> must end with <code>alternateLicenseValue</code>.</li>
             </ul>
         </section>
 
@@ -60,7 +61,7 @@
                 <li><strong>GL</strong> <code>licenseValue</code> MUST be between four and twelve numeric digits.<span class="todo">TODO add this rule to the schema</span></li>
                 <li><strong>EL</strong> <code>credentialSubject</code> <code>id</code>MUST match <strong>GL</strong> <code>issuer</code>.</li>
                 <li><strong>GL</strong> <code>licenseValue</code>  MUST begin with and MUST be at least one digit longer than the <strong>EL</strong>  <code>licenseValue</code>.</li>
-                <li><strong>GL</strong>  <code>alternateLicenseValue</code> (if present) MUST ...<span class="todo">TODO this is complicated</span></li>
+                <li>If <strong>PL</strong> <code>alternateLicenseValue</code> is present,  <code>licenseValue</code> must end with <code>alternateLicenseValue</code>.</li>
             </ul>
         </section>
 
@@ -73,7 +74,7 @@
                 <li><strong>EL</strong> MUST be a valid <a href="#license-validation">GS1 License Credential</a>.</li>
                 <li><strong>EL</strong> <code>credentialSubject</code> <code>id</code>MUST match <strong>IL</strong> <code>issuer</code>.</li>
                 <li><strong>IL</strong> <code>licenseValue</code> MUST begin with and MUST be at least one digit longer than the <strong>EL</strong> <code>licenseValue</code></li>
-                <li><strong>IL</strong>  <code>alternateLicenseValue</code> (if present) MUST ...<span class="todo">TODO this is complicated</span></li>
+                <li>If <strong>PL</strong> <code>alternateLicenseValue</code> is present,  <code>licenseValue</code> must end with <code>alternateLicenseValue</code>.</li>
             </ul>
         </section>
     </section>

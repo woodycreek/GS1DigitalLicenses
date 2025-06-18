@@ -199,7 +199,7 @@
       "VerifiableCredential",
       "KeyCredential"
     ],
-    "name": "GS1 Key Credential",
+    "name": "GS1 ID Key Credential",
     "description": "THIS GS1 DIGITAL LICENSE CREDENTIAL IS FOR TESTING PURPOSES ONLY. This is the Verifiable Credential that indicates that something has been identified. It contains no data about what has been identified as that is done via the association process. This credential is used only to indicate that the key that it contains exists and is valid.",
     "id": "did:key:z6MkjJLbS3eAmBG6AX7AuPgjVeDNdgz34fC7pF5RghwYNutE",
     "validFrom": "2024-01-25T12:30:00.000Z",

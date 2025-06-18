@@ -84,23 +84,33 @@
                     <td>This property is optional in the VCDM but MUST be present and MUST be a GS1 Digital Link URI. See Section <a href='#key-credential-subject-id'></a>.</td>
                 </tr>
                 <tr>
+                    <td><code>validFrom</code></td>
+                    <td>This property is optional in the VCDM but MUST be present in all GS1 ID Key Credentials.</td>
+                </tr>
+                <tr>
+                    <td><code>name</code></td>
+                    <td>This property is optional in the VCDM but MUST be present in all GS1 ID Key Credentials. See Section <a href="#key-credential-name"></a>.</td>
+                </tr>
+                <tr>
+                    <td><code>description</code></td>
+                    <td>This property is optional in the VCDM but MUST be present in all GS1 ID Key Credentials. See Section <a href="#key-credential-description"></a>.</td>
+                </tr>
+                <tr>
                     <td><code>credentialStatus</code></td>
                     <td>This property is optional in the VCDM but MUST be present and be of the type <code>BitstringStatusListEntry</code>
-                    defined in the <a target="_blank" rel="noopener noreferrer" href="https://www.w3.org/TR/vc-bitstring-status-list/">vc-bitstring-status-list</a> from the W3C. <span class="todo">confirm with Steering Committee</span>Do we force our members to do this?</td>
+                    defined in the <a target="_blank" rel="noopener noreferrer" href="https://www.w3.org/TR/vc-bitstring-status-list/">vc-bitstring-status-list</a> from the W3C.</td>
                 </tr>
                 <tr>
                     <td><code>credentialSchema</code></td>
                     <td>This property is optional in the VCDM but MUST be present and be of the type <code>JsonSchema</code>
-                        defined in the <a target="_blank" rel="noopener noreferrer" href="https://www.w3.org/TR/vc-json-schema/">vc-json-schema</a> from the W3C.</td>
+                        defined in the <a target="_blank" rel="noopener noreferrer" href="https://www.w3.org/TR/vc-json-schema/">vc-json-schema</a> specification from the W3C.</td>
                 </tr>
                 <tr>
                     <td><code>renderMethod</code></td>
-                    <td>This property is optional in the VCDM but SHOULD be present and SHOULD be of the type <code>SvgRenderingTemplate</code>. <span class="todo">confirm with Steering Committee</span>Do we force our members to do this?</td>
+                    <td>This property is optional in the VCDM but SHOULD be present and SHOULD be of the type <code>SvgRenderingTemplate</code> defined in the <a target="_blank" rel="noopener noreferrer" href="https://w3c-ccg.github.io/vc-render-method/">vc-render-method</a> specification from the W3C.</td>
                 </tr>
             </tbody>
             </table>
-
-            <p><span class="todo">confirm with Steering Committee</span>Should we require description? What about an Issuer name. These are assumed for the renderings below.</p>
 
             <p>All GS1 ID Key Credentials share these additional properties:
 
@@ -148,17 +158,24 @@
             <p>The ID Key <code>credentialSubject</code> <code>id</code> property MUST be present and MUST be a GS1 Digital Link URI.</p>
         </section>
 
+        <section id="key-credential-name">
+            <h3>ID Key Credential Name Property</h3>
+            <p>The ID Key Credential <code>name</code> property MUST be present and SHOULD contain the following short string: "GS1 ID Key Credential"</p>
+        </section>
+
+        <section id="key-credential-description">
+            <h3>ID Key Credential Description</h3>
+            <p>The ID Key Credential <code>description</code> properly MUST be present and SHOULD contain
+            the following description: "This is a Verifiable Credential that indicates that something has been identified. It contains no data about what has been identified as that is done via the association process. This credential is used only to indicate that the GS1 ID Key that it contains exists and is valid."</p>
+        </section>
         <section id="key-credential-extends-credential">
             <h3>ID Key Credential extendsCredential property</h3>
-            <p>The ID Key Credential <code>extendsCredential</code> property MUST be one of the following:
-                <ul>
-                    <li>A reference to a GS1 License Credential where the primary GS1 ID Key extracted from the ID Key Credential <code>credentialSubject</code> <code>id</code>
-                        MUST begin with (as a string) the <code>licenseValue</code> from the credential referenced in the <code>extendsCredential</code> property</li>
-                    <li>a reference to another GS1 ID Key Credential where the canonicalized <code>credentialSubject</code> <code>id</code>  of the credential MUST start with and MUST extend the canonicalized <code>credentialSubject</code> <code>id</code> of the credential referenced in <code>extendsCredential</code>.
-                </ul>
-            </p>
 
-            <span class="todo">confirm with Steering Committee</span>By these rules its possible to create a batch/lot/serial number credential and extend a GCP. Do we require that there be a chain as the granularity gets more specific? Should these comparisons only be done on the path component of the GS1 Digital Link or should it include the query components?
+            <p>If the <code>credentialSubject</code> of the GS1 ID Key credential contains a GS1 Digital Link with a primary key <strong>K</strong> and no key qualifiers, then the <code>extendsCredential</code> property MUST contain a link to a GS1 License Credenial whose <code>licenseValue</code> is the string that starts <strong>K</strong>.</p>
+
+            <p> If the <code>credentialSubject</code> of the GS1 ID Key credential contains a GS1 Digital Link with a primary key <strong>K</strong> and key qualifiers <strong>Q</strong> then the <code>extendsCredential</code> property MUST contain a link to a GS1 ID Key Credential whose <code>credentialSubject</code> contains a GS1 Digital Link with the same primary key <strong>K</strong> and no key qualifiers.</p>
+
+            For a description of primary keys and key qualifiers see <a target="_blank" rel="noopener noreferrer" href="https://ref.gs1.org/standards/digital-link/uri-syntax/">The GS1 Digital Link Specification</a>.
 
             <p>A few examples:</p>
             <ul>
@@ -166,11 +183,9 @@
                 <li>A GS1 ID Key credential with <code>credentialSubject</code> <code>id</code> <code>https://id.gs1.org/01/07541234555551</code> does <strong>NOT</strong> properly extend a GCP credential with <code>licenseValue</code>  <code>0755555</code></li>
                 <li>A GS1 ID Key credential with <code>credentialSubject</code> <code>id</code> <code>https://id.gs1.org/01/07541234555551/10/ABC123</code> properly extends a GS1 ID Key Credential with <code>credentialSubject</code> <code>id</code> <code>https://id.gs1.org/01/07541234555551</code></li>
                 <li>A GS1 ID Key credential with <code>credentialSubject</code> <code>id</code> <code>https://id.gs1.org/01/07541234555551/10/ABC123</code> does <strong>NOT</strong> properly extend a GS1 ID Key Credential with <code>credentialSubject</code> <code>id</code> <code>https://id.gs1.org/01/07541234777777</code></li>
-                <li>A GS1 ID Key credential with <code>credentialSubject</code> <code>id</code> <code>https://id.gs1.org/01/07541234555551/10/ABC123</code> does <strong>NOT</strong> properly extend a GS1 ID Key Credential with <code>credentialSubject</code> <code>id</code> <code>https://id.gs1.org/01/07541234555551/10/ABC123</code> because although it "starts with", it does not "extend".</li>
+                <li>A GS1 ID Key credential with <code>credentialSubject</code> <code>id</code> <code>https://id.gs1.org/01/07541234555551/10/ABC123</code> does <strong>NOT</strong> properly extend a GS1 ID Key Credential with <code>credentialSubject</code> <code>id</code> <code>https://id.gs1.org/01/07541234555551/10/ABC123</code> because although it has the same primary key, it contains a key qualifier.</li>
             </ul>
-
         </section>
-
     </section>
     <section id="key-credential-details">
         <h3>ID Key Credential Examples</h3>
